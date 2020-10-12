@@ -1,13 +1,22 @@
-import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function TodoItem({ item, pressHandler }) {
-  
+  const confirm = (key) =>
+    Alert.alert('Are you sure', 'Delete this todo?', [
+      { text: 'Cancel' },
+      { text: 'OK', onPress: () => pressHandler(key) },
+    ]);
+
   return (
-    <TouchableOpacity onPress={() => pressHandler(item.key)}>
-      <Text style={styles.item}>{item.text}</Text>
+    <TouchableOpacity onPress={() => confirm(item.key)}>
+      <View style={styles.item}>
+        <MaterialIcons name='delete' size={18} color='#333' />
+        <Text style={styles.text}>{item.text}</Text>
+      </View>
     </TouchableOpacity>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -18,5 +27,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'dashed',
     borderRadius: 10,
+    flexDirection: 'row',
   },
-})
+  text: {
+    marginLeft: 10,
+  },
+});
