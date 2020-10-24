@@ -21,10 +21,10 @@ export default function AddTodo({ submitHandler }) {
         style={styles.input}
         placeholder='New todo...'
         onChangeText={changeHandler}
+        onSubmitEditing={addTodo}
         ref={(input) => {
           textInput = input;
         }}
-        onSubmitEditing={addTodo}
       />
       <Button onPress={addTodo} title='Add Todo' color='coral' />
     </View>
